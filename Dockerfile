@@ -2,7 +2,7 @@ FROM python:3.7-alpine
 LABEL maintainer="parkyes90"
 
 ENV PYTHONUNBUFFERED 1
-ENV PATH="/script:${PATH}"
+ENV PATH="/scripts:${PATH}"
 
 RUN pip install --upgrade pip
 
