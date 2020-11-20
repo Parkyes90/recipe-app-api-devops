@@ -17,7 +17,7 @@ stages:
 Test and Lint:
   image: docker:19.03.5
   services:
-    - docker:19.03.05-dind
+    - docker:19.03.5-dind
   stage: Test and Lint
   script:
     - apk add python3-dev libffi-dev openssl-dev gcc libc-dev make
