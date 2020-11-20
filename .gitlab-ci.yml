@@ -33,7 +33,7 @@ Validate Terraform:
     - cd deploy/
     - terraform init --backend=false
     - terraform validate
-    - tarraform fmt -check
+    - terraform fmt -check
   rules:
     - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(master|production)$/  || $CI_COMMIT_BRANCH =~ /^(master|production)$/'
 
