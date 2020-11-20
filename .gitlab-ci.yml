@@ -103,7 +103,7 @@ Staging Destroy:
     - cd deploy/
     - terraform init
     - terraform workspace select staging
-    - terraform destory -auto-approve
+    - terraform destroy -auto-approve
   rules:
     - if: '$CI_COMMIT_BRANCH =~ /^(master|production)$/'
       when: manual
@@ -114,7 +114,7 @@ Production Destroy:
     - cd deploy/
     - terraform init
     - terraform workspace select production
-    - terraform destory -auto-approve
+    - terraform destroy -auto-approve
   rules:
     - if: '$CI_COMMIT_BRANCH == "production"'
       when: manual
