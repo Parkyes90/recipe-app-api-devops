@@ -89,7 +89,7 @@ Production Plan:
 Production Apply:
   stage: Production Apply
   script:
-    - echo "Run Terraform Apply for Production"
+    - cd deploy/
     - export TF_VAR_ecr_image_api:$ECR_REPO:$CI_COMMIT_SHORT_SHA
     - terraform init
     - terraform workspace select production
@@ -100,7 +100,10 @@ Production Apply:
 Staging Destroy:
   stage: Destroy
   script:
-    - echo "Run Terraform Destory for Staging"
+    - cd deploy/
+    - terraform init
+    - terraform workspace select staging
+    - terraform destory -auto-approve
   rules:
     - if: '$CI_COMMIT_BRANCH =~ /^(master|production)$/'
       when: manual
@@ -108,7 +111,10 @@ Staging Destroy:
 Production Destroy:
   stage: Destroy
   script:
-    - echo "Run Terraform Destory for Staging"
+    - cd deploy/
+    - terraform init
+    - terraform workspace select production
+    - terraform destory -auto-approve
   rules:
     - if: '$CI_COMMIT_BRANCH == "production"'
       when: manual
