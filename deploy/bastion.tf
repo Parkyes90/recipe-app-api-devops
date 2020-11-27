@@ -16,7 +16,7 @@ resource "aws_iam_role" "bastion" {
 resource "aws_iam_role_policy_attachment" "bastion_attach_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 
-  role       = aws_iam_role.bastion.name
+  role = aws_iam_role.bastion.name
 }
 
 resource "aws_iam_instance_profile" "bastion" {
