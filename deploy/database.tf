@@ -20,7 +20,9 @@ resource "aws_security_group" "rds" {
     protocol  = "tcp"
     to_port   = 5432
     security_groups = [
-    aws_security_group.bastion.id]
+      aws_security_group.bastion.id,
+      aws_security_group.ecs_service.id
+    ]
   }
   tags = local.common_tags
 }
