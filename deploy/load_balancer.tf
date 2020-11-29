@@ -26,6 +26,21 @@ resource "aws_lb_listener" "api" {
   port              = 80
   protocol          = "HTTP"
   default_action {
+    type = "redirect"
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+resource "aws_lb_listener" "api_https" {
+  load_balancer_arn = aws_lb.api.arn
+  port              = 443
+  protocol          = "HTTPS"
+  certificate_arn   = aws_acm_certificate_validation.cert.certificate_arn
+  default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.api.arn
   }
@@ -40,6 +55,12 @@ resource "aws_security_group" "lb" {
     from_port   = 80
     protocol    = "tcp"
     to_port     = 80
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port   = 443
+    protocol    = "tcp"
+    to_port     = 443
     cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
